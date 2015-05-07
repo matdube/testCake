@@ -1,4 +1,4 @@
-var target = Argument("target", "Build");
+var target = Argument("target", "CreateRelease");
 var solutions = GetFiles("./*.sln");
 var outputDir = "./build/";
 
@@ -49,11 +49,19 @@ Task("CreateRelease")
     .Does(() =>
 {
 	OctoCreateRelease(
-		"TestMathieu"
-		new OctoCreateReleaseSettings
+		"TestMathieu",
+        "http://vooban-octopus1.cloudapp.net/octopus/",
+        "API-RVFD2U8AMSG9EZ6QB21CL4PNZQG",
+		new CreateReleaseSettings
 		{
-			packageFolder = "./ConsoleApplication1/bin/debug/"
+            ToolPath = @".\packages\OctopusTools\Octo.exe",
+            ReleaseNotes = @"asdasd
+            asdasdasd
+
+            a
+            ",
+            EnableDebugLogging = true
 		});
-}
+});
 
 RunTarget(target);
